@@ -3,7 +3,7 @@
  */
 package ch.simschla.rebootbot
 
-import ch.simschla.rebootbot.domain.internetbox.InternetBoxUi
+import ch.simschla.rebootbot.domain.tplinkswitch.TpLinkSwitchUi
 import java.net.URL
 
 class App {
@@ -14,6 +14,8 @@ class App {
 }
 
 fun main() {
-    val internetBoxUi = InternetBoxUi(URL("https://192.168.1.1"))
-    internetBoxUi.rebootBox()
+//    val internetBoxUi = InternetBoxUi(URL("https://192.168.1.1"))
+//    internetBoxUi.rebootBox()
+    val tpLinkSwitchUi = TpLinkSwitchUi(URL("http://192.168.1.2"))
+    tpLinkSwitchUi.rebootSwitch()
 }
