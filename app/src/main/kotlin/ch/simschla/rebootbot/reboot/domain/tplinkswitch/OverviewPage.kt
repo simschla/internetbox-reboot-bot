@@ -1,4 +1,4 @@
-package ch.simschla.rebootbot.domain.tplinkswitch
+package ch.simschla.rebootbot.reboot.domain.tplinkswitch
 
 import com.microsoft.playwright.Locator
 import com.microsoft.playwright.Page
@@ -11,7 +11,7 @@ class OverviewPage(private val page: Page, val baseURL: URL) {
     }
 
     fun navigate() {
-        if (!page.url().equals("$baseURL/${URL_PATH}")) {
+        if (!page.url().equals("$baseURL/$URL_PATH")) {
             page.navigate("$baseURL/$URL_PATH")
         }
         page.frame("mainFrame").getByText("System Info").waitFor()

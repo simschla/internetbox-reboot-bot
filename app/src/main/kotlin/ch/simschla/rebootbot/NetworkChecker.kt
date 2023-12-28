@@ -6,11 +6,10 @@ import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 
 class NetworkChecker(private val targetURL: URL, private val httpMethod: String = "HEAD") {
-    private val client by lazy { HttpClient.newHttpClient() }
 
     fun check(): Boolean {
         return try {
-            val client = HttpClient.newHttpClient()
+            val client = HttpClient.newBuilder().followRedirects(HttpClient.Redirect.NORMAL).build()
             val request =
                 HttpRequest.newBuilder()
                     .uri(targetURL.toURI())

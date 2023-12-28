@@ -1,10 +1,11 @@
-package ch.simschla.rebootbot.domain.internetbox
+package ch.simschla.rebootbot.reboot.domain.internetbox
 
 import ch.simschla.rebootbot.browser.BrowserInstance
+import ch.simschla.rebootbot.reboot.RebootActor
 import java.net.URL
 
-class InternetBoxUi(private val internetBoxAdminUi: URL) {
-    fun rebootBox() {
+class InternetBoxUi(private val internetBoxAdminUi: URL) : RebootActor {
+    override fun reboot() {
         BrowserInstance.create().use { browserInstance ->
             val loginPage = LoginPage(browserInstance.page, internetBoxAdminUi)
             loginPage.navigate()

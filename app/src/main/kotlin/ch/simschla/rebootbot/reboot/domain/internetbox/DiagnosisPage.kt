@@ -1,4 +1,4 @@
-package ch.simschla.rebootbot.domain.internetbox
+package ch.simschla.rebootbot.reboot.domain.internetbox
 
 import com.microsoft.playwright.Locator
 import com.microsoft.playwright.Page

@@ -1,4 +1,4 @@
-package ch.simschla.rebootbot.domain.tplinkswitch
+package ch.simschla.rebootbot.reboot.domain.tplinkswitch
 
 import com.microsoft.playwright.Page
 import java.net.URL
