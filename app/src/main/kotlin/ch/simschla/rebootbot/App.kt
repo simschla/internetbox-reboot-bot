@@ -3,6 +3,7 @@
  */
 package ch.simschla.rebootbot
 
+import ch.simschla.rebootbot.check.NetworkChecker
 import ch.simschla.rebootbot.reboot.domain.tplinkswitch.TpLinkSwitchUi
 import java.net.URL
 

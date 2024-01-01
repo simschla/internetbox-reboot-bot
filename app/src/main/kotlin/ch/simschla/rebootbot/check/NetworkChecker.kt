@@ -1,13 +1,12 @@
-package ch.simschla.rebootbot
+package ch.simschla.rebootbot.check
 
 import java.net.URL
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 
-class NetworkChecker(private val targetURL: URL, private val httpMethod: String = "HEAD") {
-
-    fun check(): Boolean {
+class NetworkChecker(private val targetURL: URL, private val httpMethod: String = "HEAD") : Checker {
+    override fun check(): Boolean {
         return try {
             val client = HttpClient.newBuilder().followRedirects(HttpClient.Redirect.NORMAL).build()
             val request =

@@ -5,7 +5,6 @@ import com.microsoft.playwright.Page
 import java.net.URL
 
 class OverviewPage(private val page: Page, val baseURL: URL) {
-
     companion object {
         const val URL_PATH = ""
     }
