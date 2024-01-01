@@ -5,7 +5,7 @@ import ch.simschla.rebootbot.reboot.RebootActor
 import java.net.URL
 
 class InternetBoxUi(private val internetBoxAdminUi: URL) : RebootActor {
-    override fun reboot() {
+    override fun reboot(dryRun: Boolean) {
         BrowserInstance.create().use { browserInstance ->
             val loginPage = LoginPage(browserInstance.page, internetBoxAdminUi)
             loginPage.navigate()
@@ -21,7 +21,7 @@ class InternetBoxUi(private val internetBoxAdminUi: URL) : RebootActor {
             systemSettingsPage.navigate()
             val rebootBoxPage = systemSettingsPage.openRebootPage()
             rebootBoxPage.navigate()
-            rebootBoxPage.triggerReboot()
+            rebootBoxPage.triggerReboot(dryRun)
         }
     }
 

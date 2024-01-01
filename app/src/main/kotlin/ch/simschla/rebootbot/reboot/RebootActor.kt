@@ -1,5 +1,5 @@
 package ch.simschla.rebootbot.reboot
 
 interface RebootActor {
-    fun reboot()
+    fun reboot(dryRun: Boolean = true)
 }

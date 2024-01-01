@@ -15,14 +15,18 @@ class SystemSettingsRebootPage(private val page: Page, private val baseURL: URL)
         }
     }
 
-    fun triggerReboot() {
+    fun triggerReboot(dryRun: Boolean) {
         val rebootButton = page.locator("div.reboot a.reboot-gateway")
         rebootButton.waitFor()
         rebootButton.click()
         // opens confirmation dialog
         val confirmButton = page.locator("div.reboot-gateway a.start-reboot")
         confirmButton.waitFor()
-//        confirmButton.click()
+        if (!dryRun) {
+            confirmButton.click()
+        } else {
+            println("Dry run: not rebooting")
+        }
         page.screenshot(Page.ScreenshotOptions().setPath(Path.of("screenshot.png")))
     }
 }

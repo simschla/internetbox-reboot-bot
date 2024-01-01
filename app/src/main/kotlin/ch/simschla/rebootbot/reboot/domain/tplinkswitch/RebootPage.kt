@@ -20,7 +20,7 @@ class RebootPage(private val page: Page, val baseURL: URL) {
             .waitFor()
     }
 
-    fun triggerReboot() {
+    fun triggerReboot(dryRun: Boolean) {
         val rebootButton =
             page
                 .frame("mainFrame")
@@ -30,9 +30,12 @@ class RebootPage(private val page: Page, val baseURL: URL) {
         // will open javascript confirm
         page.onDialog { dialog ->
             if (dialog.message().contains("reboot the device")) {
-//                dialog.accept()
-                println("Would accept the dialog, but skipping for now")
-                dialog.dismiss()
+                if (!dryRun) {
+                    dialog.accept()
+                } else {
+                    println("Dry run: not rebooting")
+                    dialog.dismiss()
+                }
                 page.screenshot(Page.ScreenshotOptions().setPath(Path.of("screenshot.png")))
             } else {
                 println("Unexpected dialog: ${dialog.message()}")

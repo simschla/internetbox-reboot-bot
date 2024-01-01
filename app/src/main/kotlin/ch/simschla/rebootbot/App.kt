@@ -32,5 +32,5 @@ fun main() {
 //    internetBoxUi.rebootBox()
     val rebooters = listOf(InternetBoxUi(URL("https://192.168.1.1")), WaitRebootActor(18), TpLinkSwitchUi(URL("http://192.168.1.2")))
     val rebooter = SequentialRebootActor(rebooters)
-    rebooter.reboot()
+    rebooter.reboot(dryRun = true)
 }
