@@ -17,4 +17,8 @@ class TpLinkSwitchUi(private val switchAdminUi: URL) : RebootActor {
             rebootPage.triggerReboot()
         }
     }
+
+    override fun toString(): String {
+        return "TpLinkSwitchUi(switchAdminUi=$switchAdminUi)"
+    }
 }

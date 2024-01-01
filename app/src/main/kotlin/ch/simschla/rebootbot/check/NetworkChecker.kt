@@ -13,6 +13,7 @@ class NetworkChecker(private val targetURL: URL, private val httpMethod: String 
                 HttpRequest.newBuilder()
                     .uri(targetURL.toURI())
                     .method(httpMethod, HttpRequest.BodyPublishers.noBody())
+                    .timeout(java.time.Duration.ofSeconds(10))
                     .build()
 
             val response = client.send(request, HttpResponse.BodyHandlers.ofString())
@@ -22,5 +23,9 @@ class NetworkChecker(private val targetURL: URL, private val httpMethod: String 
             println("Exception: $e") // TODO add logging
             false
         }
+    }
+
+    override fun toString(): String {
+        return "NetworkChecker(targetURL=$targetURL, httpMethod='$httpMethod')"
     }
 }

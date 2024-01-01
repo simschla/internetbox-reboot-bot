@@ -3,7 +3,11 @@
  */
 package ch.simschla.rebootbot
 
+import ch.simschla.rebootbot.check.MajorityVotingChecker
 import ch.simschla.rebootbot.check.NetworkChecker
+import ch.simschla.rebootbot.reboot.domain.generic.SequentialRebootActor
+import ch.simschla.rebootbot.reboot.domain.generic.WaitRebootActor
+import ch.simschla.rebootbot.reboot.domain.internetbox.InternetBoxUi
 import ch.simschla.rebootbot.reboot.domain.tplinkswitch.TpLinkSwitchUi
 import java.net.URL
 
@@ -15,11 +19,18 @@ class App {
 }
 
 fun main() {
-    val networkChecker = NetworkChecker(URL("https://www.bluewin.ch"))
+    val networkCheckers =
+        listOf(
+            NetworkChecker(URL("https://www.ethz.ch")),
+            NetworkChecker(URL("https://www.bluewin.ch")),
+            NetworkChecker(targetURL = URL("https://www.swisscom.ch"), httpMethod = "GET"),
+        )
+    val networkChecker = MajorityVotingChecker(networkCheckers)
     val online = networkChecker.check()
     println("Online: $online")
 //    val internetBoxUi = InternetBoxUi(URL("https://192.168.1.1"))
 //    internetBoxUi.rebootBox()
-    val tpLinkSwitchUi = TpLinkSwitchUi(URL("http://192.168.1.2"))
-    tpLinkSwitchUi.reboot()
+    val rebooters = listOf(InternetBoxUi(URL("https://192.168.1.1")), WaitRebootActor(18), TpLinkSwitchUi(URL("http://192.168.1.2")))
+    val rebooter = SequentialRebootActor(rebooters)
+    rebooter.reboot()
 }

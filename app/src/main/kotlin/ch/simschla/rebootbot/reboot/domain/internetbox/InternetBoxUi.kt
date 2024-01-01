@@ -16,16 +16,16 @@ class InternetBoxUi(private val internetBoxAdminUi: URL) : RebootActor {
 
             val diagnosisPage = overviewPage.openDiagnosisPage()
             val online = diagnosisPage.getInternetStatus()
-            if (true || !online) {
-                println("Internet is not online, rebooting")
-                val systemSettingsPage = overviewPage.openSystemSettingsPage()
-                systemSettingsPage.navigate()
-                val rebootBoxPage = systemSettingsPage.openRebootPage()
-                rebootBoxPage.navigate()
-                rebootBoxPage.triggerReboot()
-            } else {
-                println("Internet is online, no reboot required")
-            }
+            println("Internetbox Internet Status: $online")
+            val systemSettingsPage = overviewPage.openSystemSettingsPage()
+            systemSettingsPage.navigate()
+            val rebootBoxPage = systemSettingsPage.openRebootPage()
+            rebootBoxPage.navigate()
+            rebootBoxPage.triggerReboot()
         }
+    }
+
+    override fun toString(): String {
+        return "InternetBoxUi(internetBoxAdminUi=$internetBoxAdminUi)"
     }
 }
