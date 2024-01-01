@@ -9,6 +9,7 @@ import ch.simschla.rebootbot.reboot.domain.generic.SequentialRebootActor
 import ch.simschla.rebootbot.reboot.domain.generic.WaitRebootActor
 import ch.simschla.rebootbot.reboot.domain.internetbox.InternetBoxUi
 import ch.simschla.rebootbot.reboot.domain.tplinkswitch.TpLinkSwitchUi
+import mu.KotlinLogging
 import java.net.URL
 
 class App {
@@ -17,6 +18,8 @@ class App {
             return "Hello World!"
         }
 }
+
+private val logger = KotlinLogging.logger("ch.simschla.rebootbot.App")
 
 fun main() {
     val networkCheckers =
@@ -27,7 +30,7 @@ fun main() {
         )
     val networkChecker = MajorityVotingChecker(networkCheckers)
     val online = networkChecker.check()
-    println("Online: $online")
+    logger.info { "Online: $online" }
 //    val internetBoxUi = InternetBoxUi(URL("https://192.168.1.1"))
 //    internetBoxUi.rebootBox()
     val rebooters = listOf(InternetBoxUi(URL("https://192.168.1.1")), WaitRebootActor(18), TpLinkSwitchUi(URL("http://192.168.1.2")))

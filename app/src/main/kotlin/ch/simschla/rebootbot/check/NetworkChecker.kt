@@ -1,9 +1,12 @@
 package ch.simschla.rebootbot.check
 
+import mu.KotlinLogging
 import java.net.URL
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
+
+private val logger = KotlinLogging.logger {}
 
 class NetworkChecker(private val targetURL: URL, private val httpMethod: String = "HEAD") : Checker {
     override fun check(): Boolean {
@@ -20,7 +23,7 @@ class NetworkChecker(private val targetURL: URL, private val httpMethod: String 
 
             response.statusCode() == 200
         } catch (e: Exception) {
-            println("Exception: $e") // TODO add logging
+            logger.error { "Exception: $e" }
             false
         }
     }

@@ -6,7 +6,6 @@ import java.net.URL
 
 class TpLinkSwitchUi(private val switchAdminUi: URL) : RebootActor {
     override fun reboot(dryRun: Boolean) {
-        println("Rebooting switch")
         BrowserInstance.create().use { browserInstance ->
             val loginPage = LoginPage(browserInstance.page, switchAdminUi)
             loginPage.navigate()

@@ -34,6 +34,10 @@ dependencies {
     implementation("com.google.guava:guava:32.1.1-jre")
 
     implementation("com.microsoft.playwright:playwright:1.40.0")
+
+    // logging
+    implementation ("io.github.microutils:kotlin-logging-jvm:3.0.5")
+    runtimeOnly("ch.qos.logback:logback-classic:1.4.14")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.

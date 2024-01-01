@@ -1,8 +1,11 @@
 package ch.simschla.rebootbot.reboot.domain.internetbox
 
 import com.microsoft.playwright.Page
+import mu.KotlinLogging
 import java.net.URL
 import java.nio.file.Path
+
+private val logger = KotlinLogging.logger {}
 
 class SystemSettingsRebootPage(private val page: Page, private val baseURL: URL) {
     companion object {
@@ -25,7 +28,7 @@ class SystemSettingsRebootPage(private val page: Page, private val baseURL: URL)
         if (!dryRun) {
             confirmButton.click()
         } else {
-            println("Dry run: not rebooting")
+            logger.info { "Dry run: not rebooting" }
         }
         page.screenshot(Page.ScreenshotOptions().setPath(Path.of("screenshot.png")))
     }

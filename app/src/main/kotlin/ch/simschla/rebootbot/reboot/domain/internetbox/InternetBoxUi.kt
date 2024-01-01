@@ -2,7 +2,10 @@ package ch.simschla.rebootbot.reboot.domain.internetbox
 
 import ch.simschla.rebootbot.browser.BrowserInstance
 import ch.simschla.rebootbot.reboot.RebootActor
+import mu.KotlinLogging
 import java.net.URL
+
+private val logger = KotlinLogging.logger {}
 
 class InternetBoxUi(private val internetBoxAdminUi: URL) : RebootActor {
     override fun reboot(dryRun: Boolean) {
@@ -16,7 +19,7 @@ class InternetBoxUi(private val internetBoxAdminUi: URL) : RebootActor {
 
             val diagnosisPage = overviewPage.openDiagnosisPage()
             val online = diagnosisPage.getInternetStatus()
-            println("Internetbox Internet Status: $online")
+            logger.info { "Internetbox Internet Status: $online" }
             val systemSettingsPage = overviewPage.openSystemSettingsPage()
             systemSettingsPage.navigate()
             val rebootBoxPage = systemSettingsPage.openRebootPage()

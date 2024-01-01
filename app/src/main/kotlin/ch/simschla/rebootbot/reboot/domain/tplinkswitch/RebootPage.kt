@@ -2,8 +2,11 @@ package ch.simschla.rebootbot.reboot.domain.tplinkswitch
 
 import com.microsoft.playwright.Locator
 import com.microsoft.playwright.Page
+import mu.KotlinLogging
 import java.net.URL
 import java.nio.file.Path
+
+private val logger = KotlinLogging.logger {}
 
 class RebootPage(private val page: Page, val baseURL: URL) {
     companion object {
@@ -33,12 +36,12 @@ class RebootPage(private val page: Page, val baseURL: URL) {
                 if (!dryRun) {
                     dialog.accept()
                 } else {
-                    println("Dry run: not rebooting")
+                    logger.info { "Dry run: not rebooting" }
                     dialog.dismiss()
                 }
                 page.screenshot(Page.ScreenshotOptions().setPath(Path.of("screenshot.png")))
             } else {
-                println("Unexpected dialog: ${dialog.message()}")
+                logger.error { "Unexpected dialog: ${dialog.message()}" }
                 dialog.dismiss()
             }
         }
