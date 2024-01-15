@@ -38,6 +38,10 @@ dependencies {
     // logging
     implementation ("io.github.microutils:kotlin-logging-jvm:3.0.5")
     runtimeOnly("ch.qos.logback:logback-classic:1.4.14")
+
+    // yaml parsing
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.16.1")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.16.1")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.

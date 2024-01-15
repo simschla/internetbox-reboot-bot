@@ -1,0 +1,6 @@
+networkChecker:
+  type: url
+  url: https://www.google.com
+rebootActor:
+  type: internet-box
+  url: https://192.168.1.1

@@ -1,0 +1,24 @@
+networkChecker:
+  type: majority
+  of:
+    - type: url
+      url: https://www.google.com
+    - type: url
+      url: https://www.github.com
+    - type: url
+      url: https://www.facebook.com
+    - type: url
+      url: https://www.microsoft.com
+      httpMethod: GET
+rebootActor:
+  type: sequential
+  of:
+    - type: internet-box
+      url: https://192.168.1.1
+    - type: wait
+      seconds: 120
+    - type: tp-link-switch
+      url: https://192.168.1.2
+    - type: wait
+      seconds: 20
+dryRun: true
