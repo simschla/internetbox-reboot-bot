@@ -2,16 +2,16 @@ package ch.simschla.rebootbot.reboot.domain.internetbox
 
 import com.microsoft.playwright.Locator
 import com.microsoft.playwright.Page
-import java.net.URL
+import java.net.URI
 
-class DiagnosisPage(private val page: Page, private val baseURL: URL) {
+class DiagnosisPage(private val page: Page, private val baseURI: URI) {
     companion object {
-        const val URL_PATH = "#diagnostics/info/overview"
+        const val URI_PATH = "#diagnostics/info/overview"
     }
 
     fun navigate() {
-        if (!page.url().endsWith(URL_PATH)) {
-            page.navigate("$baseURL/$URL_PATH")
+        if (!page.url().endsWith(URI_PATH)) {
+            page.navigate("$baseURI/$URI_PATH")
         }
     }
 

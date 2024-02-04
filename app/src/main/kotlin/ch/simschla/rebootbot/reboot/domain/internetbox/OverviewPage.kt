@@ -1,16 +1,16 @@
 package ch.simschla.rebootbot.reboot.domain.internetbox
 
 import com.microsoft.playwright.Page
-import java.net.URL
+import java.net.URI
 
-class OverviewPage(private val page: Page, val baseURL: URL) {
+class OverviewPage(private val page: Page, val baseURI: URI) {
     companion object {
-        const val URL_PATH = "#overview"
+        const val URI_PATH = "#overview"
     }
 
     fun navigate() {
-        if (!page.url().endsWith(URL_PATH)) {
-            page.navigate("$baseURL/$URL_PATH")
+        if (!page.url().endsWith(URI_PATH)) {
+            page.navigate("$baseURI/$URI_PATH")
         }
         page.getByText("Home network overview").waitFor()
     }
@@ -31,15 +31,15 @@ class OverviewPage(private val page: Page, val baseURL: URL) {
         val diagnosisLink = page.locator("li.menu-diagnostics a")
         diagnosisLink.waitFor()
         diagnosisLink.click()
-        page.waitForURL("**/${DiagnosisPage.URL_PATH}")
-        return DiagnosisPage(page, baseURL)
+        page.waitForURL("**/${DiagnosisPage.URI_PATH}")
+        return DiagnosisPage(page, baseURI)
     }
 
     fun openSystemSettingsPage(): SystemSettingsPage {
         val internetBoxLink = page.locator("li.navigation-item.menu-system>a")
         internetBoxLink.waitFor()
         internetBoxLink.click()
-        page.waitForURL("**/${SystemSettingsPage.URL_PATH}")
-        return SystemSettingsPage(page, baseURL)
+        page.waitForURL("**/${SystemSettingsPage.URI_PATH}")
+        return SystemSettingsPage(page, baseURI)
     }
 }

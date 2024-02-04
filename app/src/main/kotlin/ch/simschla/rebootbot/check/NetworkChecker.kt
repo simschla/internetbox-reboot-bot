@@ -1,20 +1,20 @@
 package ch.simschla.rebootbot.check
 
 import mu.KotlinLogging
-import java.net.URL
+import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 
 private val logger = KotlinLogging.logger {}
 
-class NetworkChecker(private val targetURL: URL, private val httpMethod: String = "HEAD") : Checker {
+class NetworkChecker(private val targetURI: URI, private val httpMethod: String = "HEAD") : Checker {
     override fun check(): Boolean {
         return try {
             val client = HttpClient.newBuilder().followRedirects(HttpClient.Redirect.NORMAL).build()
             val request =
                 HttpRequest.newBuilder()
-                    .uri(targetURL.toURI())
+                    .uri(targetURI)
                     .method(httpMethod, HttpRequest.BodyPublishers.noBody())
                     .timeout(java.time.Duration.ofSeconds(10))
                     .build()
@@ -29,6 +29,6 @@ class NetworkChecker(private val targetURL: URL, private val httpMethod: String 
     }
 
     override fun toString(): String {
-        return "NetworkChecker(targetURL=$targetURL, httpMethod='$httpMethod')"
+        return "NetworkChecker(targetURI=$targetURI, httpMethod='$httpMethod')"
     }
 }

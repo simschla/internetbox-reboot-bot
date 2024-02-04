@@ -1,16 +1,16 @@
 package ch.simschla.rebootbot.reboot.domain.internetbox
 
 import com.microsoft.playwright.Page
-import java.net.URL
+import java.net.URI
 
-class LoginPage(private val page: Page, private val baseURL: URL) {
+class LoginPage(private val page: Page, private val baseURI: URI) {
     fun navigate() {
-        page.navigate("$baseURL/#login")
+        page.navigate("$baseURI/#login")
     }
 
     fun doLogin(): OverviewPage {
         if (!page.url().contains("login")) {
-            return OverviewPage(page, baseURL) // no login required
+            return OverviewPage(page, baseURI) // no login required
         }
         val inputPassword = page.locator("input[name=\"login-password\"]")
         inputPassword.waitFor()
@@ -19,7 +19,7 @@ class LoginPage(private val page: Page, private val baseURL: URL) {
         val loginButton = page.locator("a[name=\"login-button\"]")
         loginButton.waitFor()
         page.click("a[name=\"login-button\"]")
-        page.waitForURL("**/${OverviewPage.URL_PATH}")
-        return OverviewPage(page, baseURL)
+        page.waitForURL("**/${OverviewPage.URI_PATH}")
+        return OverviewPage(page, baseURI)
     }
 }

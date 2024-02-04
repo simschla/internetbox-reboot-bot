@@ -3,11 +3,11 @@ package ch.simschla.rebootbot.reboot.domain.internetbox
 import ch.simschla.rebootbot.browser.BrowserInstance
 import ch.simschla.rebootbot.reboot.RebootActor
 import mu.KotlinLogging
-import java.net.URL
+import java.net.URI
 
 private val logger = KotlinLogging.logger {}
 
-class InternetBoxUi(private val internetBoxAdminUi: URL) : RebootActor {
+class InternetBoxUi(private val internetBoxAdminUi: URI) : RebootActor {
     override fun reboot(dryRun: Boolean) {
         BrowserInstance.create().use { browserInstance ->
             val loginPage = LoginPage(browserInstance.page, internetBoxAdminUi)

@@ -2,19 +2,19 @@ package ch.simschla.rebootbot.reboot.domain.internetbox
 
 import com.microsoft.playwright.Page
 import mu.KotlinLogging
-import java.net.URL
+import java.net.URI
 import java.nio.file.Path
 
 private val logger = KotlinLogging.logger {}
 
-class SystemSettingsRebootPage(private val page: Page, private val baseURL: URL) {
+class SystemSettingsRebootPage(private val page: Page, private val baseURI: URI) {
     companion object {
-        const val URL_PATH = "#system/settings/reboot"
+        const val URI_PATH = "#system/settings/reboot"
     }
 
     fun navigate() {
-        if (!page.url().endsWith(URL_PATH)) {
-            page.navigate("$baseURL/$URL_PATH")
+        if (!page.url().endsWith(URI_PATH)) {
+            page.navigate("$baseURI/$URI_PATH")
         }
     }
 

@@ -2,16 +2,16 @@ package ch.simschla.rebootbot.reboot.domain.tplinkswitch
 
 import com.microsoft.playwright.Locator
 import com.microsoft.playwright.Page
-import java.net.URL
+import java.net.URI
 
-class OverviewPage(private val page: Page, val baseURL: URL) {
+class OverviewPage(private val page: Page, val baseURI: URI) {
     companion object {
-        const val URL_PATH = ""
+        const val URI_PATH = ""
     }
 
     fun navigate() {
-        if (!page.url().equals("$baseURL/$URL_PATH")) {
-            page.navigate("$baseURL/$URL_PATH")
+        if (!page.url().equals("$baseURI/$URI_PATH")) {
+            page.navigate("$baseURI/$URI_PATH")
         }
         page.frame("mainFrame").getByText("System Info").waitFor()
     }
@@ -33,6 +33,6 @@ class OverviewPage(private val page: Page, val baseURL: URL) {
         val rebootPageLink = page.frame("bottomLeftFrame").getByText("System Reboot")
         rebootPageLink.waitFor()
         rebootPageLink.click()
-        return RebootPage(page, baseURL)
+        return RebootPage(page, baseURI)
     }
 }

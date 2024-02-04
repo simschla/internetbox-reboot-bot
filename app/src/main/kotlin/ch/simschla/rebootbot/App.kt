@@ -10,7 +10,7 @@ import ch.simschla.rebootbot.reboot.domain.generic.WaitRebootActor
 import ch.simschla.rebootbot.reboot.domain.internetbox.InternetBoxUi
 import ch.simschla.rebootbot.reboot.domain.tplinkswitch.TpLinkSwitchUi
 import mu.KotlinLogging
-import java.net.URL
+import java.net.URI
 
 class App {
     val greeting: String
@@ -24,16 +24,16 @@ private val logger = KotlinLogging.logger("ch.simschla.rebootbot.App")
 fun main() {
     val networkCheckers =
         listOf(
-            NetworkChecker(URL("https://www.ethz.ch")),
-            NetworkChecker(URL("https://www.bluewin.ch")),
-            NetworkChecker(targetURL = URL("https://www.swisscom.ch"), httpMethod = "GET"),
+            NetworkChecker(URI("https://www.ethz.ch")),
+            NetworkChecker(URI("https://www.bluewin.ch")),
+            NetworkChecker(targetURI = URI("https://www.swisscom.ch"), httpMethod = "GET"),
         )
     val networkChecker = MajorityVotingChecker(networkCheckers)
     val online = networkChecker.check()
     logger.info { "Online: $online" }
-//    val internetBoxUi = InternetBoxUi(URL("https://192.168.1.1"))
+//    val internetBoxUi = InternetBoxUi(URI("https://192.168.1.1"))
 //    internetBoxUi.rebootBox()
-    val rebooters = listOf(InternetBoxUi(URL("https://192.168.1.1")), WaitRebootActor(18), TpLinkSwitchUi(URL("http://192.168.1.2")))
+    val rebooters = listOf(InternetBoxUi(URI("https://192.168.1.1")), WaitRebootActor(18), TpLinkSwitchUi(URI("http://192.168.1.2")))
     val rebooter = SequentialRebootActor(rebooters)
     rebooter.reboot(dryRun = true)
 }
