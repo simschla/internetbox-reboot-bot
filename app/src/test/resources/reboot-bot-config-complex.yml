@@ -1,15 +1,18 @@
 networkChecker:
-  type: majority
-  of:
-    - type: url
-      url: https://www.google.com
-    - type: url
-      url: https://www.github.com
-    - type: url
-      url: https://www.facebook.com
-    - type: url
-      url: https://www.microsoft.com
-      httpMethod: GET
+  type: failAfter
+  seconds: 300
+  from:
+      type: majority
+      of:
+        - type: url
+          url: https://www.google.com
+        - type: url
+          url: https://www.github.com
+        - type: url
+          url: https://www.facebook.com
+        - type: url
+          url: https://www.microsoft.com
+          httpMethod: GET
 rebootActor:
   type: sequential
   of:

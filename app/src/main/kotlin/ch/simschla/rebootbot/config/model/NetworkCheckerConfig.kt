@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo
 )
 @JsonSubTypes(
     JsonSubTypes.Type(MajorityVotingNetworkCheckerConfig::class, name = "majority"),
+    JsonSubTypes.Type(FailAfterDurationCheckerConfig::class, name = "failAfter"),
     JsonSubTypes.Type(UrlNetworkCheckerConfig::class, name = "url"),
 )
 interface NetworkCheckerConfig {

@@ -1,6 +1,6 @@
 package ch.simschla.rebootbot.config.model
 
-import ch.simschla.rebootbot.check.MajorityVotingChecker
+import ch.simschla.rebootbot.check.FailAfterDurationChecker
 import ch.simschla.rebootbot.check.NetworkChecker
 import ch.simschla.rebootbot.reboot.domain.generic.SequentialRebootActor
 import ch.simschla.rebootbot.reboot.domain.internetbox.InternetBoxUi
@@ -16,10 +16,13 @@ class RebootBotConfigTest {
 
     @Test fun readsComplexConfig() {
         val config = RebootBotConfig.fromResource("/reboot-bot-config-complex.yml")
-        assert(config.networkChecker is MajorityVotingNetworkCheckerConfig)
-        val rootNetworkChecker = config.networkChecker as MajorityVotingNetworkCheckerConfig
-        assert(rootNetworkChecker.of.contains(UrlNetworkCheckerConfig("https://www.google.com")))
-        assert(rootNetworkChecker.of.contains(UrlNetworkCheckerConfig("https://www.microsoft.com", "GET")))
+        assert(config.networkChecker is FailAfterDurationCheckerConfig)
+        val failAfterDurationCheckerConfig = config.networkChecker as FailAfterDurationCheckerConfig
+        assert(failAfterDurationCheckerConfig.seconds == 300L)
+        assert(failAfterDurationCheckerConfig.from is MajorityVotingNetworkCheckerConfig)
+        val majorityVotingCheckerConfig = failAfterDurationCheckerConfig.from as MajorityVotingNetworkCheckerConfig
+        assert(majorityVotingCheckerConfig.of.contains(UrlNetworkCheckerConfig("https://www.google.com")))
+        assert(majorityVotingCheckerConfig.of.contains(UrlNetworkCheckerConfig("https://www.microsoft.com", "GET")))
         assert(config.rebootActor is SequentialRebootActorConfig)
         val rootRebootActor = config.rebootActor as SequentialRebootActorConfig
         assert(rootRebootActor.of.contains(InternetBoxUIRebootActorConfig("https://192.168.1.1")))
@@ -38,7 +41,7 @@ class RebootBotConfigTest {
     @Test fun instantiatesComplexBot() {
         val config = RebootBotConfig.fromResource("/reboot-bot-config-complex.yml")
         val bot = config.instantiate()
-        assert(bot.checker is MajorityVotingChecker)
+        assert(bot.checker is FailAfterDurationChecker)
         assert(bot.rebootActor is SequentialRebootActor)
         assert(bot.dryRun == true)
     }
