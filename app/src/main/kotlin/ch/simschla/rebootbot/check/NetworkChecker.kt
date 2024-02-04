@@ -20,8 +20,14 @@ class NetworkChecker(private val targetURI: URI, private val httpMethod: String 
                     .build()
 
             val response = client.send(request, HttpResponse.BodyHandlers.ofString())
-
-            response.statusCode() == 200
+            val responseCode = response.statusCode()
+            logger.debug { "Response code for $httpMethod $targetURI: $responseCode" }
+            if (responseCode != 200) {
+                logger.info { "Check for $httpMethod $targetURI failed. Response code: $responseCode" }
+            } else {
+                logger.debug { "Check for $httpMethod $targetURI succeeded. Response code: $responseCode" }
+            }
+            return responseCode == 200
         } catch (e: Exception) {
             logger.error { "Exception: $e" }
             false

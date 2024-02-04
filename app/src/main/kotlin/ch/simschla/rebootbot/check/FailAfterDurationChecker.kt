@@ -20,9 +20,10 @@ class FailAfterDurationChecker(private val duration: Duration, private val deleg
             return true
         }
         if (isDurationElapsed()) {
-            logger.warn { "Delegate check failed for longer than $duration" }
+            logger.info { "Delegate check failed for longer than $duration -- failing!" }
             return false
         }
+        logger.info { "Delegate check failed, but duration $duration not elapsed yet -- not failing." }
         return true
     }
 
