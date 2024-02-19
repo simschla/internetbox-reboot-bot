@@ -3,6 +3,7 @@
  */
 package ch.simschla.rebootbot
 
+import ch.simschla.rebootbot.browser.BrowserDriverInstaller
 import ch.simschla.rebootbot.check.MajorityVotingChecker
 import ch.simschla.rebootbot.check.NetworkChecker
 import ch.simschla.rebootbot.reboot.domain.generic.SequentialRebootActor
@@ -22,6 +23,7 @@ class App {
 private val logger = KotlinLogging.logger("ch.simschla.rebootbot.App")
 
 fun main() {
+    BrowserDriverInstaller.prepareBrowserBinaries()
     val networkCheckers =
         listOf(
             NetworkChecker(URI("https://www.ethz.ch")),
