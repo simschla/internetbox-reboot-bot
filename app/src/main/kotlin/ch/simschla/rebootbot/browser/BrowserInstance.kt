@@ -9,7 +9,7 @@ import com.microsoft.playwright.Playwright
 class BrowserInstance : AutoCloseable {
     private val playwrightDelegate = lazy { Playwright.create() }
     val playwright: Playwright by playwrightDelegate
-    val browser: Browser by lazy { playwright.chromium().launch(BrowserType.LaunchOptions().setHeadless(false)) }
+    val browser: Browser by lazy { playwright.chromium().launch(BrowserType.LaunchOptions().setHeadless(true)) }
     val context: BrowserContext by lazy { browser.newContext(Browser.NewContextOptions().setIgnoreHTTPSErrors(true)) }
     val page: Page by lazy { context.newPage() }
 

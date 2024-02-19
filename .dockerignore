@@ -1,0 +1,8 @@
+/.gradle
+/.idea
+/gradle
+
+/app/build
+!/app/build/install
+
+/app/src

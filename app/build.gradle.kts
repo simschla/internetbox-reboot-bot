@@ -68,6 +68,12 @@ spotless {
 application {
     // Define the main class for the application.
     mainClass.set("ch.simschla.rebootbot.AppKt")
+    applicationName = "internetbox3-reboot-bot"
+}
+
+val appArchiveBaseName = "internetbox3-reboot-bot"
+tasks.withType<Jar>().configureEach {
+    archiveBaseName.set(appArchiveBaseName)
 }
 
 tasks.named<Test>("test") {
