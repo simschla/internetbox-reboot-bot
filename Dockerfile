@@ -1,11 +1,9 @@
-# TODO switch to ubuntu, playwright does not work on alpine
 ARG ZULU_JRE_VERSION=21.0.2-jre
 ARG UBUNTU_VERSION=22.04
-ARG ALPINE_RUN_VERSION=3.19.0
 
 ARG TIMEZONE="Europe/Zurich"
 
-ARG APP_DIST_NAME=internetbox3-reboot-bot
+ARG APP_DIST_NAME=internetbox-reboot-bot
 ARG APP_DIST_DIR=/app/build/install/$APP_DIST_NAME
 
 ############### JDK ################
@@ -70,7 +68,7 @@ WORKDIR /app
 
 #optimize boot time https://youtu.be/8SdrYGIM384
 RUN java -Xshare:dump
-ENV INTERNETBOX3_REBOOT_BOT_OPTS="-showversion -Xshare:on"
+ENV INTERNETBOX_REBOOT_BOT_OPTS="-showversion -Xshare:on"
 
 ENV APP_DIST_NAME=$APP_DIST_NAME
 
