@@ -42,6 +42,9 @@ dependencies {
     // yaml parsing
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.16.1")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.16.1")
+
+    // cli interface
+    implementation("com.github.ajalt.clikt:clikt:4.2.2")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
