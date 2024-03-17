@@ -4,52 +4,94 @@ import ch.simschla.rebootbot.check.FailAfterDurationChecker
 import ch.simschla.rebootbot.check.NetworkChecker
 import ch.simschla.rebootbot.reboot.domain.generic.SequentialRebootActor
 import ch.simschla.rebootbot.reboot.domain.internetbox.InternetBoxUi
+import org.junit.jupiter.api.Test
+import strikt.api.expect
+import strikt.api.expectThat
+import strikt.assertions.isA
+import strikt.assertions.isEqualTo
+import strikt.assertions.isFalse
+import strikt.assertions.isTrue
 import java.time.temporal.ChronoUnit
-import kotlin.test.Test
 
 class RebootBotConfigTest {
-    @Test fun readsSimpleConfig() {
+    @Test
+    fun readsSimpleConfig() {
         val config = RebootBotConfig.fromResource("/reboot-bot-config-simple.yml")
-        assert(config.driver is DelayedRetryingDriverConfig)
-        assert(config.networkChecker is UrlNetworkCheckerConfig)
-        assert(config.rebootActor is InternetBoxUIRebootActorConfig)
-        assert(config.dryRun == false)
+
+        expect {
+            that(config.driver).isA<DelayedRetryingDriverConfig>()
+            that(config.networkChecker).isA<UrlNetworkCheckerConfig>()
+            that(config.rebootActor).isA<InternetBoxUIRebootActorConfig>()
+            that(config.dryRun).isFalse()
+        }
     }
 
     @Test fun readsComplexConfig() {
         val config = RebootBotConfig.fromResource("/reboot-bot-config-complex.yml")
-        assert(config.driver is DelayedRetryingDriverConfig)
-        val driverConfig = config.driver as DelayedRetryingDriverConfig
-        assert(driverConfig.timeUnit == ChronoUnit.MINUTES)
-        assert(driverConfig.timeBetweenChecks == 10L)
-        assert(driverConfig.maxRetries == 5)
-        assert(config.networkChecker is FailAfterDurationCheckerConfig)
-        val failAfterDurationCheckerConfig = config.networkChecker as FailAfterDurationCheckerConfig
-        assert(failAfterDurationCheckerConfig.seconds == 300L)
-        assert(failAfterDurationCheckerConfig.from is MajorityVotingNetworkCheckerConfig)
-        val majorityVotingCheckerConfig = failAfterDurationCheckerConfig.from as MajorityVotingNetworkCheckerConfig
-        assert(majorityVotingCheckerConfig.of.contains(UrlNetworkCheckerConfig("https://www.google.com")))
-        assert(majorityVotingCheckerConfig.of.contains(UrlNetworkCheckerConfig("https://www.microsoft.com", "GET")))
-        assert(config.rebootActor is SequentialRebootActorConfig)
-        val rootRebootActor = config.rebootActor as SequentialRebootActorConfig
-        assert(rootRebootActor.of.contains(InternetBoxUIRebootActorConfig("https://192.168.1.1")))
-        assert(rootRebootActor.of.contains(TpLinkSwitchUIRebootActorConfig("https://192.168.1.2")))
-        assert(config.dryRun == true)
+
+        expectThat(config) {
+            get { driver }.isA<DelayedRetryingDriverConfig>()
+            get { driver as DelayedRetryingDriverConfig }.and {
+                get { timeUnit }.isEqualTo(ChronoUnit.MINUTES)
+                get { timeBetweenChecks }.isEqualTo(10L)
+                get { maxRetries }.isEqualTo(5)
+            }
+
+            get { networkChecker }.isA<FailAfterDurationCheckerConfig>()
+            get { networkChecker as FailAfterDurationCheckerConfig }.and {
+                get { seconds }.isEqualTo(300L)
+                get { from }.isA<MajorityVotingNetworkCheckerConfig>()
+                get { from as MajorityVotingNetworkCheckerConfig }.and {
+                    get { of }.isA<List<UrlNetworkCheckerConfig>>()
+                    get { of[0] }.isA<UrlNetworkCheckerConfig>()
+                    get { of[0] as UrlNetworkCheckerConfig }.and {
+                        get { url }.isEqualTo("https://www.google.com")
+                        get { httpMethod }.isEqualTo("HEAD")
+                    }
+                    get { of[3] }.isA<UrlNetworkCheckerConfig>()
+                    get { of[3] as UrlNetworkCheckerConfig }.and {
+                        get { url }.isEqualTo("https://www.microsoft.com")
+                        get { httpMethod }.isEqualTo("GET")
+                    }
+                }
+            }
+
+            get { rebootActor }.isA<SequentialRebootActorConfig>()
+            get { rebootActor as SequentialRebootActorConfig }.and {
+                get { of }.isA<List<RebootActorConfig>>()
+                get { of[0] }.isA<InternetBoxUIRebootActorConfig>()
+                get { of[0] as InternetBoxUIRebootActorConfig }.and {
+                    get { url }.isEqualTo("https://192.168.1.1")
+                }
+                get { of[2] }.isA<TpLinkSwitchUIRebootActorConfig>()
+                get { of[2] as TpLinkSwitchUIRebootActorConfig }.and {
+                    get { url }.isEqualTo("https://192.168.1.2")
+                }
+            }
+
+            get { dryRun }.isTrue()
+        }
     }
 
     @Test fun instantiatesSimpleBot() {
         val config = RebootBotConfig.fromResource("/reboot-bot-config-simple.yml")
         val bot = config.instantiate()
-        assert(bot.checker is NetworkChecker)
-        assert(bot.rebootActor is InternetBoxUi)
-        assert(bot.dryRun == false)
+
+        expectThat(bot) {
+            get { checker }.isA<NetworkChecker>()
+            get { rebootActor }.isA<InternetBoxUi>()
+            get { dryRun }.isFalse()
+        }
     }
 
     @Test fun instantiatesComplexBot() {
         val config = RebootBotConfig.fromResource("/reboot-bot-config-complex.yml")
         val bot = config.instantiate()
-        assert(bot.checker is FailAfterDurationChecker)
-        assert(bot.rebootActor is SequentialRebootActor)
-        assert(bot.dryRun == true)
+
+        expectThat(bot) {
+            get { checker }.isA<FailAfterDurationChecker>()
+            get { rebootActor }.isA<SequentialRebootActor>()
+            get { dryRun }.isTrue()
+        }
     }
 }

@@ -22,17 +22,11 @@ repositories {
 }
 
 dependencies {
-    // Use the Kotlin JUnit 5 integration.
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+    // testing
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
+    testImplementation("io.strikt:strikt-core:0.34.1")
 
-    // Use the JUnit 5 integration.
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.9.3")
-
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
-    // This dependency is used by the application.
-    implementation("com.google.guava:guava:32.1.1-jre")
-
+    // playwright for running browser automation
     implementation("com.microsoft.playwright:playwright:1.40.0")
 
     // logging

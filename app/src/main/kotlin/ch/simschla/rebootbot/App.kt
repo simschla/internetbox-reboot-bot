@@ -19,11 +19,6 @@ import mu.KotlinLogging
 import java.net.URI
 
 class App : CliktCommand() {
-    val greeting: String
-        get() {
-            return "Hello World!"
-        }
-
     private val configFile: String? by option(help = "The configuration file")
         .file(mustExist = true, mustBeReadable = true, canBeFile = true, canBeDir = false)
         .convert { it.readText() }
