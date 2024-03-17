@@ -4,11 +4,13 @@ import ch.simschla.rebootbot.check.FailAfterDurationChecker
 import ch.simschla.rebootbot.check.NetworkChecker
 import ch.simschla.rebootbot.reboot.domain.generic.SequentialRebootActor
 import ch.simschla.rebootbot.reboot.domain.internetbox.InternetBoxUi
+import java.time.temporal.ChronoUnit
 import kotlin.test.Test
 
 class RebootBotConfigTest {
     @Test fun readsSimpleConfig() {
         val config = RebootBotConfig.fromResource("/reboot-bot-config-simple.yml")
+        assert(config.driver is DelayedRetryingDriverConfig)
         assert(config.networkChecker is UrlNetworkCheckerConfig)
         assert(config.rebootActor is InternetBoxUIRebootActorConfig)
         assert(config.dryRun == false)
@@ -16,6 +18,11 @@ class RebootBotConfigTest {
 
     @Test fun readsComplexConfig() {
         val config = RebootBotConfig.fromResource("/reboot-bot-config-complex.yml")
+        assert(config.driver is DelayedRetryingDriverConfig)
+        val driverConfig = config.driver as DelayedRetryingDriverConfig
+        assert(driverConfig.timeUnit == ChronoUnit.MINUTES)
+        assert(driverConfig.timeBetweenChecks == 10L)
+        assert(driverConfig.maxRetries == 5)
         assert(config.networkChecker is FailAfterDurationCheckerConfig)
         val failAfterDurationCheckerConfig = config.networkChecker as FailAfterDurationCheckerConfig
         assert(failAfterDurationCheckerConfig.seconds == 300L)

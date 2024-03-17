@@ -1,3 +1,8 @@
+driver:
+  type: delayed-retry
+  timeBetweenChecks: 10
+  timeUnit: MINUTES
+  maxRetries: 5
 networkChecker:
   type: failAfter
   seconds: 300
