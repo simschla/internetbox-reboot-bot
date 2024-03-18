@@ -1,0 +1,30 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  extends: ["config:recommended", ":semanticCommits"],
+  gitAuthor: "Renovate Bot <renovate@whitesourcesoftware.com>",
+  prConcurrentLimit: 3,
+  automerge: false, // by default do not automerge
+  dependencyDashboard: true,
+  labels: ["changelog:dependencies"],
+  osvVulnerabilityAlerts: true,
+  vulnerabilityAlerts: {
+    commitMessageSuffix: "[SECURITY-{{{vulnerabilitySeverity}}}]",
+    labels: ["changelog:security"],
+  },
+  packageRules: [
+    // auto-merge patches and minors
+    {
+      matchUpdateTypes: ["patch", "minor"],
+      matchCurrentVersion: "!/^0/",
+      // ignore 0.x.x versions
+      automerge: true,
+      automergeStrategy: "rebase",
+      rebaseWhen: "behind-base-branch",
+    },
+    // github-actions are not interesting for changelog
+    {
+      matchManagers: ["github-actions"],
+      labels: ["changelog:skip"],
+    },
+  ],
+}

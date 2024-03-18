@@ -1,0 +1,47 @@
+# $schema: https://raw.githubusercontent.com/release-drafter/release-drafter/master/schema.json
+name-template: "$RESOLVED_VERSION"
+tag-template: "v$RESOLVED_VERSION"
+tag-prefix: "v"
+template: |
+  $CHANGES
+change-template: "- $TITLE ([#$NUMBER](https://github.com/simschla/internetbox-reboot-bot/pull/$NUMBER)) @$AUTHOR"
+categories:
+  - title: ":rocket: Added"
+    labels:
+      - "changelog:added"
+  - title: ":dizzy: Changed"
+    labels:
+      - "changelog:changed"
+  - title: ":person_white_hair: Deprecated"
+    labels:
+      - "changelog:deprecated "
+  - title: ":no_good: Removed"
+    labels:
+      - "changelog:removed"
+  - title: ":bug: Fixed"
+    labels:
+      - "changelog:fixed"
+  - title: ":cop: Security"
+    labels:
+      - "changelog:security"
+  - title: ":bowtie: Dependency Updates"
+    labels:
+      - "changelog:dependencies"
+
+version-resolver:
+  major:
+    labels:
+      - "changelog:removed"
+      - "changelog:major"
+  minor:
+    labels:
+      - "changelog:added"
+      - "changelog:deprecated"
+  patch:
+    labels:
+      - "changelog:fixed"
+      - "changelog:security"
+      - "changelog:dependencies"
+
+exclude-labels:
+  - "changelog:skip"

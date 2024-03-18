@@ -1,0 +1,53 @@
+name: Release Drafter
+
+on:
+  push:
+    # branches to consider in the event; optional, defaults to all
+    branches:
+      - main
+  # pull_request event is required only for autolabeler
+  # pull_request:
+  # Only following types are handled by the action, but one can default to all as well
+  # types: [opened, reopened, synchronize]
+  # pull_request_target event is required for autolabeler to support PRs from forks
+  # pull_request_target:
+  #   types: [opened, reopened, synchronize]
+  workflow_dispatch:
+  workflow_call:
+    outputs:
+      release_body:
+        description: "Release body of the drafted release"
+        value: ${{ jobs.update_release_draft.outputs.release_body }}
+      release_tag:
+        description: "Release tag of the drafted release"
+        value: ${{ jobs.update_release_draft.outputs.release_tag }}
+      release_name:
+        description: "Release name of the drafted release"
+        value: ${{ jobs.update_release_draft.outputs.release_name }}
+
+permissions:
+  contents: read
+
+jobs:
+  update_release_draft:
+    permissions:
+      # write permission is required to create a github release
+      contents: write
+      # write permission is required for autolabeler
+      # otherwise, read permission is required at least
+      pull-requests: read
+    runs-on: ubuntu-latest
+    outputs:
+      release_body: ${{ steps.release-drafter-step.outputs.body }}
+      release_tag: ${{ steps.release-drafter-step.outputs.tag_name }}
+      release_name: ${{ steps.release-drafter-step.outputs.name }}
+    steps:
+      # Drafts your next Release notes as Pull Requests are merged into "master"
+      - uses: release-drafter/release-drafter@v6
+        id: release-drafter-step
+        # (Optional) specify config name to use, relative to .github/. Default: release-drafter.yml
+        with:
+          #   config-name: my-config.yml
+          disable-autolabeler: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

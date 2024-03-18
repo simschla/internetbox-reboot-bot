@@ -1,0 +1,29 @@
+---
+name: Run Renovate
+
+on:
+  workflow_dispatch:
+  schedule:
+    # The "*" (#42, asterisk) character has special semantics in YAML, so this
+    # string has to be quoted.
+    - cron: "0 15 */1 * *"
+jobs:
+  run_renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Renovate Bot GitHub Action
+        uses: renovatebot/github-action@v40.1.1
+        with:
+          token: ${{ secrets.RENOVATE_TOKEN }}
+          # Configuration file to configure Renovate. Either use this input or the 'RENOVATE_CONFIG_FILE' environment variable.
+          # configurationFile: # optional
+          # GitHub personal access token that Renovate should use. This should be configured using a Secret. Either use this input or the 'RENOVATE_TOKEN' environment variable
+          # token: # optional
+          # Use a lightweight renovate container without any third-party binaries. Defaults to true if not set.
+          # useSlim: # optional
+          # Override the environment variables which will be passsed into the renovate container. Defaults to `^(?:RENOVATE_\\w+|LOG_LEVEL|GITHUB_COM_TOKEN|NODE_OPTIONS)$`
+          # env-regex: # optional
+          # Renovate version to use. Defaults to latest.
+          # renovate-version: # optional
+        env:
+          RENOVATE_REPOSITORIES: simschla/internetbox-reboot-bot
