@@ -10,7 +10,7 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version "1.9.23"
 
     // add spotless for formatting
-    id("com.diffplug.spotless") version "6.23.3"
+    id("com.diffplug.spotless") version "6.25.0"
 
     // Apply the application plugin to add support for building a CLI application in Java.
     application
