@@ -31,7 +31,7 @@ dependencies {
 
     // logging
     implementation ("io.github.microutils:kotlin-logging-jvm:3.0.5")
-    runtimeOnly("ch.qos.logback:logback-classic:1.4.14")
+    runtimeOnly("ch.qos.logback:logback-classic:1.5.3")
 
     // yaml parsing
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.16.1")
