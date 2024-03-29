@@ -38,7 +38,7 @@ dependencies {
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.17.0")
 
     // cli interface
-    implementation("com.github.ajalt.clikt:clikt:4.2.2")
+    implementation("com.github.ajalt.clikt:clikt:4.3.0")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
