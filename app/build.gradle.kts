@@ -34,7 +34,7 @@ dependencies {
     runtimeOnly("ch.qos.logback:logback-classic:1.5.3")
 
     // yaml parsing
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.16.1")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.0")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.17.0")
 
     // cli interface
