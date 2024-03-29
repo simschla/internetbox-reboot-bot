@@ -27,7 +27,7 @@ dependencies {
     testImplementation("io.strikt:strikt-core:0.34.1")
 
     // playwright for running browser automation
-    implementation("com.microsoft.playwright:playwright:1.40.0")
+    implementation("com.microsoft.playwright:playwright:1.42.0")
 
     // logging
     implementation ("io.github.microutils:kotlin-logging-jvm:3.0.5")
