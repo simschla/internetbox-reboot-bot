@@ -1,0 +1,57 @@
+name: check_code
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - "releases/**"
+  workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  spotlessCheck:
+    name: gradlew spotlessCheck
+    runs-on: ubuntu-latest
+    env:
+      SEGMENT_DOWNLOAD_TIMEOUT_MINS: "15"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: "zulu"
+          java-version: 21
+          cache: "gradle"
+      - name: Run spotless check
+        run: ./gradlew spotlessCheck # add dependency:resolve to add all required stuff to cache
+  runBuild:
+    name: gradlew build
+    needs: spotlessCheck
+    runs-on: ubuntu-latest
+    env:
+      SEGMENT_DOWNLOAD_TIMEOUT_MINS: "15"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: "zulu"
+          java-version: 21
+          cache: "gradle"
+      - name: Run gradle build
+        run: ./gradlew build
+      - name: junit result
+        uses: mikepenz/action-junit-report@v4
+        if: always() # always run even if the previous step fails
+        with:
+          check_name: JUnit Report
+          report_paths: "**/build/test-results/test/*.xml"
