@@ -36,5 +36,3 @@ val appArchiveBaseName = "internetbox-reboot-bot"
 tasks.withType<Jar>().configureEach {
     archiveBaseName.set(appArchiveBaseName)
 }
-
-

@@ -10,7 +10,7 @@ dependencies {
     testImplementation("io.strikt:strikt-core:0.34.1")
 
     // logging
-    implementation ("io.github.microutils:kotlin-logging-jvm:3.0.5")
+    implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
     runtimeOnly("ch.qos.logback:logback-classic:1.5.3")
 }
 
