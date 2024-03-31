@@ -6,32 +6,17 @@
  */
 
 plugins {
-    // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
-    id("org.jetbrains.kotlin.jvm") version "1.9.23"
-
-    // add spotless for formatting
-    id("com.diffplug.spotless") version "6.25.0"
-
     // Apply the application plugin to add support for building a CLI application in Java.
     application
-}
 
-repositories {
-    // Use Maven Central for resolving dependencies.
-    mavenCentral()
+    // custom convention plugins
+    id("internetrebootbot.kotlin-convention")
+    id("internetrebootbot.spotless-convention")
 }
 
 dependencies {
-    // testing
-    testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
-    testImplementation("io.strikt:strikt-core:0.34.1")
-
     // playwright for running browser automation
     implementation("com.microsoft.playwright:playwright:1.42.0")
-
-    // logging
-    implementation ("io.github.microutils:kotlin-logging-jvm:3.0.5")
-    runtimeOnly("ch.qos.logback:logback-classic:1.5.3")
 
     // yaml parsing
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.0")
@@ -39,27 +24,6 @@ dependencies {
 
     // cli interface
     implementation("com.github.ajalt.clikt:clikt:4.3.0")
-}
-
-// Apply a specific Java toolchain to ease working on different environments.
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(21))
-    }
-}
-
-kotlin {
-    jvmToolchain {
-        languageVersion.set(JavaLanguageVersion.of(21))
-    }
-}
-
-spotless {
-    kotlin {
-        target("**/*.kt")
-        ktlint("1.1.0")
-            .setEditorConfigPath(project.file("../.editorconfig"))
-    }
 }
 
 application {
@@ -73,7 +37,4 @@ tasks.withType<Jar>().configureEach {
     archiveBaseName.set(appArchiveBaseName)
 }
 
-tasks.named<Test>("test") {
-    // Use JUnit Platform for unit tests.
-    useJUnitPlatform()
-}
+
