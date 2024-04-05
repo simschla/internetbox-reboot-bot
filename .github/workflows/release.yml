@@ -1,0 +1,128 @@
+name: Release Executor
+
+on:
+  workflow_dispatch: # only manual triggering
+    inputs:
+      optional_release_name:
+        description: "Release name. Pattern 1.2.3 - Leave empty for default"
+        required: false
+      optional_release_tag:
+        description: "Release tag. Pattern: v1.2.3 - Leave empty for default"
+        required: false
+      optional_release_body:
+        description: "Release body (what's written in the Release on github) - Leave empty for default"
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  draft_release:
+    permissions:
+      # same permissions as in release-draft.yml
+      contents: write
+      pull-requests: read
+    uses: ./.github/workflows/release-draft.yml
+    # sets the body output we require for the release below
+  create_release:
+    needs: draft_release
+    runs-on: ubuntu-latest
+    env:
+      SEGMENT_DOWNLOAD_TIMEOUT_MINS: "15"
+    steps:
+      - name: Set release info or use automatic default values
+        id: release_info
+        run: |
+          release_name="${{ github.event.inputs.optional_release_name }}"
+          echo "release_name=${release_name:-"${{ needs.draft_release.outputs.release_name }}"}" >> "$GITHUB_OUTPUT"
+          release_tag="${{ github.event.inputs.optional_release_tag }}"
+          echo "release_tag=${release_tag:-"${{ needs.draft_release.outputs.release_tag }}"}" >> "$GITHUB_OUTPUT"
+          if [[ "${{ github.event.inputs.optional_release_body }}" == "" ]]; then
+            echo "release_body<<EOF" >> "$GITHUB_OUTPUT"
+            echo "${{ needs.draft_release.outputs.release_body }}" >> "$GITHUB_OUTPUT"
+            echo "EOF" >> "$GITHUB_OUTPUT"
+          else
+            echo "release_body=${{ github.event.inputs.optional_release_body }}" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Log release info
+        run: |
+          echo "Release name: ${{ steps.release_info.outputs.release_name }}"
+          echo "Release tag: ${{ steps.release_info.outputs.release_tag }}"
+          echo "Release body: ${{ steps.release_info.outputs.release_body }}"
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: "zulu"
+          java-version: 21
+          cache: "gradle"
+      - name: Set git user
+        run: |
+          git config --global user.name "${{ vars.CI_GIT_COMMITTER_NAME }}"
+          git config --global user.email "${{ vars.CI_GIT_COMMITTER_EMAIL }}"
+
+      - name: Update Changelog
+        uses: stefanzweifel/changelog-updater-action@v1
+        with:
+          latest-version: ${{ steps.release_info.outputs.release_tag }}
+          release-notes: "${{ steps.release_info.outputs.release_body }}"
+      - name: Adjust Changelog Format # remove emojis for CHANGELOG.md
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: "### :[^:]+: "
+          replace: "### "
+          include: "CHANGELOG.md"
+      - name: Commit and tag updated CHANGELOG
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Update CHANGELOG (Release ${{ steps.release_info.outputs.release_name }})
+          file_pattern: CHANGELOG.md
+          tagging_message: "${{ steps.release_info.outputs.release_tag }}" # tag the commit with the release tag
+
+      - name: Build artifact
+        run: ./gradlew bootJar
+
+      - name: Setup QEMU for docker buildx
+        uses: docker/setup-qemu-action@v3
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/internetbox-reboot-bot:${{ steps.release_info.outputs.release_name }},${{ secrets.DOCKER_USERNAME }}/internetbox-reboot-bot:latest
+          platforms: linux/amd64,linux/arm64/v8
+
+      - name: Create github release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            target/checkout/target/*.jar
+            target/checkout/target/*.obr
+            target/checkout/pom.xml
+          fail_on_unmatched_files: true
+          name: ${{ steps.release_info.outputs.release_name }}
+          tag_name: ${{ steps.release_info.outputs.release_tag }}
+          body: "${{ steps.release_info.outputs.release_body }}"
+          append_body: false
+          draft: false
+          prerelease: false
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  update_draft_release_after_release:
+    needs: create_release
+    permissions:
+      # same permissions as in release-draft.yml
+      contents: write
+      pull-requests: read
+    uses: ./.github/workflows/release-draft.yml
