@@ -205,3 +205,6 @@ gradle-app.setting
 
 # prevent checking in env file
 /.env
+
+# exclude local build cache
+/.build-cache

@@ -29,6 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SEGMENT_DOWNLOAD_TIMEOUT_MINS: "15"
+      BUILDCACHE_LOCAL_DEFAULT_DIRECTORY: "true"
     steps:
       - name: Set release info or use automatic default values
         id: release_info
