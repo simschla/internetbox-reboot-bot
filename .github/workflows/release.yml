@@ -60,6 +60,9 @@ jobs:
           distribution: "zulu"
           java-version: 21
           cache: "gradle"
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+        
       - name: Set git user
         run: |
           git config --global user.name "${{ vars.CI_GIT_COMMITTER_NAME }}"
