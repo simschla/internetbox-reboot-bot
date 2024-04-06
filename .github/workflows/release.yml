@@ -107,7 +107,7 @@ jobs:
           platforms: linux/amd64,linux/arm64/v8
 
       - name: Create github release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: |
             target/checkout/target/*.jar
