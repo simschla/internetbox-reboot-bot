@@ -110,9 +110,9 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            target/checkout/target/*.jar
-            target/checkout/target/*.obr
-            target/checkout/pom.xml
+            app/build/distributions/*.zip
+            app/build/distributions/*.tar
+            app/build/libs/*.jar
           fail_on_unmatched_files: true
           name: ${{ steps.release_info.outputs.release_name }}
           tag_name: ${{ steps.release_info.outputs.release_tag }}
