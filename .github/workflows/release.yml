@@ -86,7 +86,7 @@ jobs:
           tagging_message: "${{ steps.release_info.outputs.release_tag }}" # tag the commit with the release tag
 
       - name: Build artifact
-        run: ./gradlew bootJar
+        run: ./gradlew clean && ./gradlew installDist
 
       - name: Setup QEMU for docker buildx
         uses: docker/setup-qemu-action@v3
