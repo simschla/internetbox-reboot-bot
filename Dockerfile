@@ -90,10 +90,14 @@ RUN chown -R bot:botgroup /app
 
 USER bot
 
+# prepare config dir
+RUN mkdir /config \
+    && chmod a+rw /config
+
 # configure app
-#VOLUME ["/config-server/data"]
+VOLUME ["/config"]
 #EXPOSE 8080
 
 
-ENTRYPOINT ["/app/bin/launch"]
+ENTRYPOINT ["/app/bin/launch", "--config-file=/config/config.yml"]
 #ENTRYPOINT ["java", "-showversion", "-jar", "$PATIENT_FORMS_JAR"]

@@ -52,6 +52,12 @@ jobs:
         uses: gradle/gradle-build-action@v3
       - name: Run gradle build
         run: ./gradlew build
+      - name: Create docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: false
       - name: junit result
         uses: mikepenz/action-junit-report@v4
         if: always() # always run even if the previous step fails
