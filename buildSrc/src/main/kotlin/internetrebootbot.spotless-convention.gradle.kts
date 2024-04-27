@@ -20,4 +20,8 @@ spotless {
         )
         prettier()
     }
+    flexmark {
+        target("*.md")
+        flexmark()
+    }
 }
