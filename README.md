@@ -17,8 +17,10 @@ InternetBox Reboot Bot is a tool designed to monitor your internet connectivity 
 ### Using the Jar File 🏺
 1. Download the latest version of the `internetbox-reboot-bot.jar` file from the releases page.
 2. Run the application using the following command:
+2. Run the application using the following command (ensure to use Java 21 or later):
+
    ```bash
-   java -jar internetbox-reboot-bot.jar --config path/to/your/config.yml
+   java -jar internetbox-reboot-bot.jar --config-file=path/to/your/config.yml
    ```
 
 ### Using the Docker Image 🐳
@@ -31,7 +33,7 @@ Either use docker directly
    ```
 2. Run the Docker container, ensuring to mount the configuration file and provide necessary passwords:
    ```bash
-   docker run -v /path/to/your/config.yml:/app/config.yml \
+   docker run -v /path/to/your/config.yml:/config/config.yml \
      -e INTERNETBOX_PASSWORD=your-internetbox-password \
      -e TPLINK_PASSWORD=your-tplink-password \
      simschla/internetbox-reboot-bot
@@ -45,7 +47,7 @@ Or use docker-compose
      internetbox-reboot-bot:
        image: simschla/internetbox-reboot-bot:latest
        volumes:
-         - /path/to/your/config.yml:/app/config.yml
+         - /path/to/your/config.yml:/config/config.yml
    ```
 
 2. Create a `.env` file containing the necessary passwords:
