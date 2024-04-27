@@ -32,7 +32,7 @@ jobs:
       - name: Run spotless check
         run: ./gradlew spotlessCheck # add dependency:resolve to add all required stuff to cache
   runBuild:
-    name: run gradlew build and docker build
+    name: run gradlew and docker build
     needs: spotlessCheck
     runs-on: ubuntu-latest
     env:
@@ -43,6 +43,14 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+         filters: |
+           docker:
+             - 'Dockerfile'
+           code:
+             - 'app/src/**'
       - name: Install JDK 21
         uses: actions/setup-java@v4
         with:
@@ -52,7 +60,8 @@ jobs:
         uses: gradle/gradle-build-action@v3
       - name: Run gradle build
         run: ./gradlew build installDist -x spotlessCheck
-      - name: Create docker image
+      - name: Create docker image if Dockerfile changed
+        if: steps.changes.outputs.docker == 'true'
         uses: docker/build-push-action@v5
         with:
           context: .
