@@ -22,3 +22,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - chore(deps): update plugin com.diffplug.spotless to v6.25.0 ([#5](https://github.com/simschla/internetbox-reboot-bot/pull/5)) @simschla
 - chore(deps): update dependency gradle to v8.7 ([#4](https://github.com/simschla/internetbox-reboot-bot/pull/4)) @simschla
 - chore(deps): update plugin org.jetbrains.kotlin.jvm to v1.9.23 ([#1](https://github.com/simschla/internetbox-reboot-bot/pull/1)) @simschla
+
