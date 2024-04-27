@@ -32,7 +32,7 @@ jobs:
       - name: Run spotless check
         run: ./gradlew spotlessCheck # add dependency:resolve to add all required stuff to cache
   runBuild:
-    name: gradlew build
+    name: run gradlew build and docker build
     needs: spotlessCheck
     runs-on: ubuntu-latest
     env:
@@ -51,7 +51,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v3
       - name: Run gradle build
-        run: ./gradlew build
+        run: ./gradlew build installDist -x spotlessCheck
       - name: Create docker image
         uses: docker/build-push-action@v5
         with:
