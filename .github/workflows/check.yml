@@ -59,7 +59,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
       - name: Run gradle build
-        run: ./gradlew build installDist -x spotlessCheck
+        run: ./gradlew build installDist distZip distTar -x spotlessCheck
       - name: Create docker image if Dockerfile changed
         if: steps.changes.outputs.docker == 'true'
         uses: docker/build-push-action@v5
