@@ -13,6 +13,7 @@ import ch.simschla.rebootbot.reboot.domain.internetbox.InternetBoxUi
 import ch.simschla.rebootbot.reboot.domain.tplinkswitch.TpLinkSwitchUi
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.convert
+import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.types.file
 import mu.KotlinLogging
@@ -23,7 +24,15 @@ class App : CliktCommand() {
         .file(mustExist = true, mustBeReadable = true, canBeFile = true, canBeDir = false)
         .convert { it.readText() }
 
+    private val initDeps: Boolean by option(help = "Initialize dependencies")
+        .flag(default = false)
+
     override fun run() {
+        if (initDeps) {
+            logger.info { "Initializing dependencies, exiting afterwards. " }
+            BrowserDriverInstaller.prepareBrowserBinaries()
+            return
+        }
         if (configFile != null) {
             logger.info { "Config file: $configFile" }
             runConfiguration()

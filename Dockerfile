@@ -17,7 +17,7 @@ ARG APP_DIST_DIR
 
 # set locale
 RUN apt-get update \
-    && apt-get install -y language-pack-en language-pack-de \
+    && apt-get install -qqqy language-pack-en language-pack-de \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
 ENV LC_ALL en_US.UTF-8
@@ -29,7 +29,7 @@ ENV TZ="$TIMEZONE"
 ENV DEBIAN_FRONTEND=noninteractive
 RUN echo $TZ > /etc/timezone \
     && apt-get update \
-    && apt-get install -y tzdata \
+    && apt-get install -qqqy tzdata \
     && rm /etc/localtime \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
     && dpkg-reconfigure -f noninteractive tzdata \
@@ -50,13 +50,13 @@ ENV PATH="$JAVA_HOME/bin:$PATH"
 
 # setup npm required for playwright
 RUN apt-get update \
-    && apt-get install -y npm \
+    && apt-get install -qqqy npm \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
 
-# setup required packages for playwright
+# setup required packages for playwright (usually displayed as error message when launching otherwise)
 RUN apt-get update \
-    && apt-get install -y libnss3 libnspr4 libgbm1 libasound2 \
+    && apt-get install -qqqy libatk1.0-0 libatk-bridge2.0-0 libcups2 libatspi2.0-0 libxdamage1 libxkbcommon0 libpango-1.0-0 libcairo2 libnss3 libnspr4 libasound2t64 \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
 
@@ -72,11 +72,6 @@ ENV INTERNETBOX_REBOOT_BOT_OPTS="-showversion -Xshare:on"
 
 ENV APP_DIST_NAME=$APP_DIST_NAME
 
-# create a user and group to start the application with a matching env
-RUN groupadd botgroup \
-    && useradd -r -m -g botgroup -s /sbin/nologin bot \
-    && env > /home/bot/.profile
-
 # copy data to target dir
 COPY $APP_DIST_DIR /app
 
@@ -86,18 +81,26 @@ RUN cd /app/bin \
 RUN chmod -R a+rw /app \
     && chmod +x /app/bin/$APP_DIST_NAME
 
-RUN chown -R bot:botgroup /app
+# create a user and group to start the application with a matching env
+RUN groupadd botgroup \
+    && useradd -r -m -g botgroup -s /sbin/nologin bot \
+    && env > /home/bot/.profile
 
-USER bot
+RUN chown -R bot:botgroup /app
 
 # prepare config dir
 RUN mkdir /config \
-    && chmod a+rw /config
+    && chmod -R a+rw /config \
+    && chown -R bot:botgroup /config
 
 # configure app
 VOLUME ["/config"]
 #EXPOSE 8080
 
 
+USER bot
+
+# init dependencies
+RUN /app/bin/$APP_DIST_NAME --init-deps
+
 ENTRYPOINT ["/app/bin/launch", "--config-file=/config/config.yml"]
-#ENTRYPOINT ["java", "-showversion", "-jar", "$PATIENT_FORMS_JAR"]
