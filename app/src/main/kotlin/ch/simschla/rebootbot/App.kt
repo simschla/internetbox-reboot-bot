@@ -58,8 +58,6 @@ class App : CliktCommand() {
         val networkChecker = MajorityVotingChecker(networkCheckers)
         val online = networkChecker.check()
         logger.info { "Online: $online" }
-//    val internetBoxUi = InternetBoxUi(URI("https://192.168.1.1"))
-//    internetBoxUi.rebootBox()
         val rebooters = listOf(InternetBoxUi(URI("https://192.168.1.1")), WaitRebootActor(18), TpLinkSwitchUi(URI("http://192.168.1.2")))
         val rebooter = SequentialRebootActor(rebooters)
         rebooter.reboot(dryRun = true)

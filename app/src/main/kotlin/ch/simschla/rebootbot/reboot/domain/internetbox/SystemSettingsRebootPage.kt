@@ -3,7 +3,6 @@ package ch.simschla.rebootbot.reboot.domain.internetbox
 import com.microsoft.playwright.Page
 import mu.KotlinLogging
 import java.net.URI
-import java.nio.file.Path
 
 private val logger = KotlinLogging.logger {}
 
@@ -30,6 +29,5 @@ class SystemSettingsRebootPage(private val page: Page, private val baseURI: URI)
         } else {
             logger.info { "Dry run: not rebooting" }
         }
-        page.screenshot(Page.ScreenshotOptions().setPath(Path.of("screenshot.png")))
     }
 }

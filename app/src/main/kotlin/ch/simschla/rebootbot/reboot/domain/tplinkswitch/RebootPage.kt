@@ -4,7 +4,6 @@ import com.microsoft.playwright.Locator
 import com.microsoft.playwright.Page
 import mu.KotlinLogging
 import java.net.URI
-import java.nio.file.Path
 
 private val logger = KotlinLogging.logger {}
 
@@ -39,7 +38,6 @@ class RebootPage(private val page: Page, val baseURI: URI) {
                     logger.info { "Dry run: not rebooting" }
                     dialog.dismiss()
                 }
-                page.screenshot(Page.ScreenshotOptions().setPath(Path.of("screenshot.png")))
             } else {
                 logger.error { "Unexpected dialog: ${dialog.message()}" }
                 dialog.dismiss()
