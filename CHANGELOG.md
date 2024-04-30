@@ -5,9 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/simschla/internetbox-reboot-bot/compare/v0.1.0...HEAD)
+## [Unreleased](https://github.com/simschla/internetbox-reboot-bot/compare/v1.0.0...HEAD)
 
 :octocat: See latest [release draft](https://github.com/simschla/internetbox-reboot-bot/releases)
+
+## [v1.0.0](https://github.com/simschla/internetbox-reboot-bot/compare/v0.1.0...v1.0.0) - 2024-04-30
+
+This is the initial release. Mostly for my personal use, but ready to be extended and used by the community.
 
 ## [v0.1.0](https://github.com/simschla/internetbox-reboot-bot/compare/v0.0.0...v0.1.0) - 2024-04-08
 
@@ -22,4 +26,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - chore(deps): update plugin com.diffplug.spotless to v6.25.0 ([#5](https://github.com/simschla/internetbox-reboot-bot/pull/5)) @simschla
 - chore(deps): update dependency gradle to v8.7 ([#4](https://github.com/simschla/internetbox-reboot-bot/pull/4)) @simschla
 - chore(deps): update plugin org.jetbrains.kotlin.jvm to v1.9.23 ([#1](https://github.com/simschla/internetbox-reboot-bot/pull/1)) @simschla
-
