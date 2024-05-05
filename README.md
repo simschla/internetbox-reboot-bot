@@ -19,13 +19,14 @@ be used in environments where stable connectivity is crucial.
 - Java 21 or later for running the jar file.
 - Docker if you prefer to run it as a Docker container.
 
-### Using the Jar File 🏺
+### Using the Application Bundle 🏺
 
-1. Download the latest version of the `internetbox-reboot-bot.jar` file from the releases page.
-2. Run the application using the following command (ensure to use Java 21 or later):
+1. Download the latest version of the `internetbox-reboot-bot.zip` (or `internetbox-reboot-bot.tar`) file from the releases page.
+2. Extract the archive
+3. Run the application using the following command (ensure to use Java 21 or later):
 
    ```bash
-   java -jar internetbox-reboot-bot.jar --config-file=path/to/your/config.yml
+   /path/to/extracted/bin/internetbox-reboot-bot --config-file=/path/to/your/config.yml
    ```
 
 ### Using the Docker Image 🐳
