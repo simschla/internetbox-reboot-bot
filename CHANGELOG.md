@@ -26,3 +26,4 @@ This is the initial release. Mostly for my personal use, but ready to be extende
 - chore(deps): update plugin com.diffplug.spotless to v6.25.0 ([#5](https://github.com/simschla/internetbox-reboot-bot/pull/5)) @simschla
 - chore(deps): update dependency gradle to v8.7 ([#4](https://github.com/simschla/internetbox-reboot-bot/pull/4)) @simschla
 - chore(deps): update plugin org.jetbrains.kotlin.jvm to v1.9.23 ([#1](https://github.com/simschla/internetbox-reboot-bot/pull/1)) @simschla
+
