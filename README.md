@@ -35,7 +35,7 @@ Either use docker directly
 1. Pull the Docker image from Docker Hub:
 
    ```bash
-   docker pull simschla/internetbox-reboot-bot:latest
+   docker pull simongamma/internetbox-reboot-bot:latest
    ```
 2. Run the Docker container, ensuring to mount the configuration file and provide necessary passwords:
 
@@ -43,7 +43,7 @@ Either use docker directly
    docker run -v /path/to/your/config.yml:/config/config.yml \
      -e INTERNETBOX_PASSWORD=your-internetbox-password \
      -e TPLINK_PASSWORD=your-tplink-password \
-     simschla/internetbox-reboot-bot
+     simongamma/internetbox-reboot-bot
    ```
 
 Or use docker-compose
@@ -53,7 +53,7 @@ Or use docker-compose
    ```yaml
    services:
      internetbox-reboot-bot:
-       image: simschla/internetbox-reboot-bot:latest
+       image: simongamma/internetbox-reboot-bot:latest
        volumes:
          - /path/to/your/config.yml:/config/config.yml
    ```
