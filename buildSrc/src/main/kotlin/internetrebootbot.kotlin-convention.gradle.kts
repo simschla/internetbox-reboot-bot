@@ -7,7 +7,7 @@ plugins {
 
 dependencies {
     // testing
-    testImplementation("io.strikt:strikt-core:0.34.1")
+    testImplementation("io.strikt:strikt-core:0.35.1")
 
     // logging
     implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
