@@ -20,7 +20,7 @@ dependencies {
 
     // yaml parsing
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.2")
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.17.2")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.18.0")
 
     // cli interface
     implementation("com.github.ajalt.clikt:clikt:4.4.0")
