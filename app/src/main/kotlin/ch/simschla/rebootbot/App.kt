@@ -12,6 +12,7 @@ import ch.simschla.rebootbot.reboot.domain.generic.WaitRebootActor
 import ch.simschla.rebootbot.reboot.domain.internetbox.InternetBoxUi
 import ch.simschla.rebootbot.reboot.domain.tplinkswitch.TpLinkSwitchUi
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.core.main
 import com.github.ajalt.clikt.parameters.options.convert
 import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
