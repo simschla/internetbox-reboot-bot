@@ -5,9 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/simschla/internetbox-reboot-bot/compare/v1.0.1...HEAD)
+## [Unreleased](https://github.com/simschla/internetbox-reboot-bot/compare/v1.0.2...HEAD)
 
 :octocat: See latest [release draft](https://github.com/simschla/internetbox-reboot-bot/releases)
+
+## [v1.0.2](https://github.com/simschla/internetbox-reboot-bot/compare/v1.0.1...v1.0.2) - 2024-10-06
+
+### Dependency Updates
+
+- fix(deps): update dependency com.github.ajalt.clikt:clikt to v5 ([#62](https://github.com/simschla/internetbox-reboot-bot/pull/62)) @simschla
+- chore(deps): update dependency org.junit.jupiter:junit-jupiter to v5.11.2 ([#68](https://github.com/simschla/internetbox-reboot-bot/pull/68)) @simschla
+- fix(deps): update dependency com.fasterxml.jackson.module:jackson-module-kotlin to v2.18.0 ([#66](https://github.com/simschla/internetbox-reboot-bot/pull/66)) @simschla
+- fix(deps): update dependency com.fasterxml.jackson.dataformat:jackson-dataformat-yaml to v2.18.0 ([#65](https://github.com/simschla/internetbox-reboot-bot/pull/65)) @simschla
+- chore(deps): update dependency org.junit.jupiter:junit-jupiter to v5.11.1 ([#64](https://github.com/simschla/internetbox-reboot-bot/pull/64)) @simschla
+- chore(deps): update dependency gradle to v8.10.2 ([#63](https://github.com/simschla/internetbox-reboot-bot/pull/63)) @simschla
+- fix(deps): update dependency com.microsoft.playwright:playwright to v1.47.0 ([#60](https://github.com/simschla/internetbox-reboot-bot/pull/60)) @simschla
+- chore(deps): update dependency gradle to v8.10.1 ([#58](https://github.com/simschla/internetbox-reboot-bot/pull/58)) @simschla
+- chore(deps): update dependency ch.qos.logback:logback-classic to v1.5.8 ([#57](https://github.com/simschla/internetbox-reboot-bot/pull/57)) @simschla
 
 ## [v1.0.1](https://github.com/simschla/internetbox-reboot-bot/compare/v1.0.0...v1.0.1) - 2024-09-02
 
