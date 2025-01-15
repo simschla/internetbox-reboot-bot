@@ -5,7 +5,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.diffplug.spotless:spotless-plugin-gradle:6.25.0")
+    implementation("com.diffplug.spotless:spotless-plugin-gradle:7.0.2")
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.20")
 //    implementation("gradle.plugin.org.jetbrains.gradle.plugin.idea-ext:gradle-idea-ext:1.1.8")
