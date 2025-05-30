@@ -6,7 +6,7 @@ plugins {
 
 dependencies {
     // testing
-    testImplementation("org.junit.jupiter:junit-jupiter:5.12.2")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.13.0")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
