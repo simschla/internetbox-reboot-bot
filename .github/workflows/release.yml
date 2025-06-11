@@ -81,7 +81,7 @@ jobs:
       - name: Fix md formatting
         run: ./gradlew spotlessFlexmarkApply
       - name: Commit and tag updated CHANGELOG
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: Update CHANGELOG (Release ${{ steps.release_info.outputs.release_name }})
           file_pattern: CHANGELOG.md
