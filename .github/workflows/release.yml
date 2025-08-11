@@ -51,7 +51,7 @@ jobs:
           echo "Release tag: ${{ steps.release_info.outputs.release_tag }}"
           echo "Release body: ${{ steps.release_info.outputs.release_body }}"
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
       - name: Install JDK 21
