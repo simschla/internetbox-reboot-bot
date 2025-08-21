@@ -23,7 +23,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Install JDK 21
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: "zulu"
           java-version: 21
@@ -52,7 +52,7 @@ jobs:
            code:
              - 'app/src/**'
       - name: Install JDK 21
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: "zulu"
           java-version: 21
