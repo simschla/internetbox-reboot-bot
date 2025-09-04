@@ -17,6 +17,5 @@ buildCache {
         if ((System.getenv().get("BUILDCACHE_LOCAL_DEFAULT_DIRECTORY") ?: "false") == "false") {
             directory = file(".build-cache")
         }
-        removeUnusedEntriesAfterDays = 30
     }
 }
