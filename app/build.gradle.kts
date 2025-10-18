@@ -16,7 +16,7 @@ plugins {
 
 dependencies {
     // playwright for running browser automation
-    implementation("com.microsoft.playwright:playwright:1.55.0")
+    implementation("com.microsoft.playwright:playwright:1.56.0")
 
     // yaml parsing
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.20.0")
