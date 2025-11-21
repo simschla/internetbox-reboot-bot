@@ -19,7 +19,7 @@ jobs:
       SEGMENT_DOWNLOAD_TIMEOUT_MINS: "15"
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Install JDK 21
@@ -40,7 +40,7 @@ jobs:
       BUILDCACHE_LOCAL_DEFAULT_DIRECTORY: "true"
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - uses: dorny/paths-filter@v3
