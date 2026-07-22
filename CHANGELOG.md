@@ -5,9 +5,58 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/simschla/internetbox-reboot-bot/compare/v1.0.6...HEAD)
+## [Unreleased](https://github.com/simschla/internetbox-reboot-bot/compare/v1.0.7...HEAD)
 
 :octocat: See latest [release draft](https://github.com/simschla/internetbox-reboot-bot/releases)
+
+## [v1.0.7](https://github.com/simschla/internetbox-reboot-bot/compare/v1.0.6...v1.0.7) - 2026-07-22
+
+### Dependency Updates
+
+- fix(deps): update jackson monorepo to v2.22.0 ([#234](https://github.com/simschla/internetbox-reboot-bot/pull/234)) @simschla
+- fix(deps): update dependency com.microsoft.playwright:playwright to v1.60.0 ([#233](https://github.com/simschla/internetbox-reboot-bot/pull/233)) @simschla
+- chore(deps): update kotlin monorepo to v2.4.0 ([#232](https://github.com/simschla/internetbox-reboot-bot/pull/232)) @simschla
+- chore(deps): update junit-framework monorepo to v6.1.0 ([#231](https://github.com/simschla/internetbox-reboot-bot/pull/231)) @simschla
+- chore(deps): update gradle to v9.5.1 ([#229](https://github.com/simschla/internetbox-reboot-bot/pull/229)) @simschla
+- chore(deps): update dependency com.diffplug.spotless:spotless-plugin-gradle to v8.6.0 ([#228](https://github.com/simschla/internetbox-reboot-bot/pull/228)) @simschla
+- chore(deps): update logback monorepo to v1.5.34 ([#227](https://github.com/simschla/internetbox-reboot-bot/pull/227)) @simschla
+- chore(deps): update azul/zulu-openjdk docker tag to v25.0.3-jre ([#226](https://github.com/simschla/internetbox-reboot-bot/pull/226)) @simschla
+- chore(deps): update gradle to v9.4.0 ([#223](https://github.com/simschla/internetbox-reboot-bot/pull/223)) @simschla
+- chore(deps): update dependency com.diffplug.spotless:spotless-plugin-gradle to v8.3.0 ([#222](https://github.com/simschla/internetbox-reboot-bot/pull/222)) @simschla
+- fix(deps): update jackson monorepo to v2.21.1 ([#221](https://github.com/simschla/internetbox-reboot-bot/pull/221)) @simschla
+- chore(deps): update dependency ch.qos.logback:logback-classic to v1.5.32 ([#219](https://github.com/simschla/internetbox-reboot-bot/pull/219)) @simschla
+- chore(deps): update dependency org.junit.jupiter:junit-jupiter to v6.0.3 ([#220](https://github.com/simschla/internetbox-reboot-bot/pull/220)) @simschla
+- chore(deps): update dependency ch.qos.logback:logback-classic to v1.5.29 ([#218](https://github.com/simschla/internetbox-reboot-bot/pull/218)) @simschla
+- chore(deps): update dependency ch.qos.logback:logback-classic to v1.5.28 ([#217](https://github.com/simschla/internetbox-reboot-bot/pull/217)) @simschla
+- chore(deps): update dependency org.jetbrains.kotlin:kotlin-gradle-plugin to v2.3.10 ([#216](https://github.com/simschla/internetbox-reboot-bot/pull/216)) @simschla
+- chore(deps): update dependency ch.qos.logback:logback-classic to v1.5.27 ([#215](https://github.com/simschla/internetbox-reboot-bot/pull/215)) @simschla
+- fix(deps): update dependency com.microsoft.playwright:playwright to v1.58.0 ([#213](https://github.com/simschla/internetbox-reboot-bot/pull/213)) @simschla
+- chore(deps): update gradle to v9.3.1 ([#212](https://github.com/simschla/internetbox-reboot-bot/pull/212)) @simschla
+- chore(deps): update dependency com.diffplug.spotless:spotless-plugin-gradle to v8.2.1 ([#211](https://github.com/simschla/internetbox-reboot-bot/pull/211)) @simschla
+- chore(deps): update dependency ch.qos.logback:logback-classic to v1.5.26 ([#210](https://github.com/simschla/internetbox-reboot-bot/pull/210)) @simschla
+- chore(deps): update dependency com.diffplug.spotless:spotless-plugin-gradle to v8.2.0 ([#209](https://github.com/simschla/internetbox-reboot-bot/pull/209)) @simschla
+- chore(deps): update azul/zulu-openjdk docker tag to v25.0.2-jre ([#208](https://github.com/simschla/internetbox-reboot-bot/pull/208)) @simschla
+- fix(deps): update jackson monorepo to v2.21.0 ([#207](https://github.com/simschla/internetbox-reboot-bot/pull/207)) @simschla
+- chore(deps): update dependency ch.qos.logback:logback-classic to v1.5.25 ([#206](https://github.com/simschla/internetbox-reboot-bot/pull/206)) @simschla
+- fix(deps): update dependency com.github.ajalt.clikt:clikt to v5.1.0 ([#205](https://github.com/simschla/internetbox-reboot-bot/pull/205)) @simschla
+- chore(deps): update gradle to v9.3.0 ([#204](https://github.com/simschla/internetbox-reboot-bot/pull/204)) @simschla
+- chore(deps): update dependency org.junit.jupiter:junit-jupiter to v6.0.2 ([#203](https://github.com/simschla/internetbox-reboot-bot/pull/203)) @simschla
+- chore(deps): update dependency ch.qos.logback:logback-classic to v1.5.24 ([#202](https://github.com/simschla/internetbox-reboot-bot/pull/202)) @simschla
+- chore(deps): update dependency ch.qos.logback:logback-classic to v1.5.23 ([#201](https://github.com/simschla/internetbox-reboot-bot/pull/201)) @simschla
+- chore(deps): update dependency org.jetbrains.kotlin:kotlin-gradle-plugin to v2.3.0 ([#200](https://github.com/simschla/internetbox-reboot-bot/pull/200)) @simschla
+- chore(deps): update dependency ch.qos.logback:logback-classic to v1.5.22 ([#199](https://github.com/simschla/internetbox-reboot-bot/pull/199)) @simschla
+- fix(deps): update dependency com.microsoft.playwright:playwright to v1.57.0 ([#198](https://github.com/simschla/internetbox-reboot-bot/pull/198)) @simschla
+- chore(deps): update dependency com.diffplug.spotless:spotless-plugin-gradle to v8.1.0 ([#196](https://github.com/simschla/internetbox-reboot-bot/pull/196)) @simschla
+- chore(deps): update gradle to v9.2.1 ([#195](https://github.com/simschla/internetbox-reboot-bot/pull/195)) @simschla
+- chore(deps): update dependency ch.qos.logback:logback-classic to v1.5.21 ([#194](https://github.com/simschla/internetbox-reboot-bot/pull/194)) @simschla
+- chore(deps): update dependency com.bmuschko:gradle-docker-plugin to v10 ([#189](https://github.com/simschla/internetbox-reboot-bot/pull/189)) @simschla
+- chore(deps): update dependency org.junit.jupiter:junit-jupiter to v6.0.1 ([#190](https://github.com/simschla/internetbox-reboot-bot/pull/190)) @simschla
+- fix(deps): update jackson monorepo to v2.20.1 ([#188](https://github.com/simschla/internetbox-reboot-bot/pull/188)) @simschla
+- chore(deps): update gradle to v9.2.0 ([#187](https://github.com/simschla/internetbox-reboot-bot/pull/187)) @simschla
+- chore(deps): update dependency org.jetbrains.kotlin:kotlin-gradle-plugin to v2.2.21 ([#185](https://github.com/simschla/internetbox-reboot-bot/pull/185)) @simschla
+- chore(deps): update azul/zulu-openjdk docker tag to v25.0.1-jre ([#184](https://github.com/simschla/internetbox-reboot-bot/pull/184)) @simschla
+- chore(deps): update dependency ch.qos.logback:logback-classic to v1.5.20 ([#182](https://github.com/simschla/internetbox-reboot-bot/pull/182)) @simschla
+- fix(deps): update dependency com.microsoft.playwright:playwright to v1.56.0 ([#181](https://github.com/simschla/internetbox-reboot-bot/pull/181)) @simschla
 
 ## [v1.0.6](https://github.com/simschla/internetbox-reboot-bot/compare/v1.0.5...v1.0.6) - 2025-10-13
 
