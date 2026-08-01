@@ -91,7 +91,7 @@ jobs:
         run: ./gradlew clean && ./gradlew installDist distZip distTar
 
       - name: Setup QEMU for docker buildx
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@v4
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v4
       - name: Login to Docker Hub
