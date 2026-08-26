@@ -11,7 +11,7 @@ dependencies {
 
     // logging
     implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
-    runtimeOnly("ch.qos.logback:logback-classic:1.6.1")
+    runtimeOnly("ch.qos.logback:logback-classic:1.6.3")
 }
 
 kotlin {
