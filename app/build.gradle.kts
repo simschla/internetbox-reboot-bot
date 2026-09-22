@@ -19,8 +19,8 @@ dependencies {
     implementation("com.microsoft.playwright:playwright:1.62.0")
 
     // yaml parsing
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.22.2")
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.22.2")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.22.3")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.22.3")
 
     // cli interface
     implementation("com.github.ajalt.clikt:clikt:5.1.0")
