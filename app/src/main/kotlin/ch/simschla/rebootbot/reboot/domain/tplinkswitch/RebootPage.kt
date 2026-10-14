@@ -16,7 +16,7 @@ class RebootPage(private val page: Page, val baseURI: URI) {
         if (!page.url().equals("$baseURI/$URI_PATH")) {
             page.navigate("$baseURI/$URI_PATH")
         }
-        page.frame("mainFrame")
+        page.frame("mainFrame")!!
             .locator("legend")
             .filter(Locator.FilterOptions().setHasText("System Reboot"))
             .waitFor()
@@ -25,7 +25,7 @@ class RebootPage(private val page: Page, val baseURI: URI) {
     fun triggerReboot(dryRun: Boolean) {
         val rebootButton =
             page
-                .frame("mainFrame")
+                .frame("mainFrame")!!
                 .locator("input[type= \"submit\"][value=\"Reboot\"]")
         rebootButton.waitFor()
 
