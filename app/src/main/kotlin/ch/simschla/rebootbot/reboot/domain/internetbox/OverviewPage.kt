@@ -21,7 +21,7 @@ class OverviewPage(private val page: Page, val baseURI: URI) {
         // check if expert mode is active
         // if the element located by userModeSwitcher has the class "checked" then expert mode is active
 
-        if (!userModeSwitcher.getAttribute("class").contains("checked")) {
+        if (!(userModeSwitcher.getAttribute("class")?.contains("checked")?: false)) {
             // enable expert mode
             userModeSwitcher.click()
         }
